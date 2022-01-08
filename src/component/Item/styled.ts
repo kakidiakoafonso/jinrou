@@ -1,0 +1,46 @@
+import styled from "styled-components/native"
+import cores from "../../configs/style/colors"
+
+export const Container = styled.View`
+width: 100%;
+height: 140px;
+flex-direction: row;
+align-items: center;
+justify-content: space-between;
+margin: 20px 0px;
+`;
+
+export const Contents = styled.View`
+width: 60%;
+height: 100%;
+justify-content: space-between;
+`
+export const Titulo = styled.Text`
+color: ${cores.yellow};
+font-size: 18px;
+font-weight: bold;
+`
+export const Message = styled.Text`
+color: ${cores.yellow};
+height: 60%;
+width: 95%;
+`
+export const Date = styled.Text`
+color: ${cores.yellow};
+font-size: 13px;
+font-weight: bold;
+`
+export const Image = styled.Image`
+width: 30%;
+height: 80%;
+background-color: white;
+border-radius: 10px;
+`
+export const CheckBox = styled.TouchableOpacity`
+width: 20px;
+height: 20px;
+border-radius: 20px;
+background-color: transparent;
+border: 1px solid ${cores.yellow};
+border-radius: 10px;
+`
