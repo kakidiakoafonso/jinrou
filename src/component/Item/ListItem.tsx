@@ -5,10 +5,13 @@ import * as S from './styled'
 
 type Props =  
 {
-    checkbox?:boolean
+    checkbox?:boolean,
+    normal?:boolean,
+    assinante?:boolean,
+    date?:boolean,
 }
 const img = "https://ovicio.com.br/wp-content/uploads/2021/03/20210315-attack-on-titan-eren_7jay-555x555.png"
-export default function ListItem({checkbox}:Props) 
+export default function ListItem({checkbox,normal,assinante,date}:Props) 
 {
     const [checked, setchecked] = useState<boolean>(false)
     return (
@@ -29,9 +32,20 @@ export default function ListItem({checkbox}:Props)
                     isDisable (Opcional), color(obrigatória) e children 
                     (obrigatória).
                 </S.Message>
-                <S.Date>12/12/2022</S.Date>
+                
+                {
+                    date && <S.Date>12/12/2022</S.Date>
+                }
+                {
+                    normal && <S.TextNormal>Normal: R$ 30.00</S.TextNormal>
+                }
+                {
+                    assinante && <S.TextAssinante>Normal: R$ 30.00</S.TextAssinante>
+                }
             </S.Contents>
             <S.Image source={{uri:img}}/>
+
+
         </S.Container>
     )
 }

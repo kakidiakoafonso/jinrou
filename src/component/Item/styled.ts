@@ -19,6 +19,7 @@ export const Titulo = styled.Text`
 color: ${cores.yellow};
 font-size: 18px;
 font-weight: bold;
+margin-bottom: 3px;
 `
 export const Message = styled.Text`
 color: ${cores.yellow};
@@ -43,4 +44,17 @@ border-radius: 20px;
 background-color: transparent;
 border: 1px solid ${cores.yellow};
 border-radius: 10px;
+`
+
+export const TextNormal = styled.Text`
+color: ${cores.yellow};
+font-size: 13px;
+font-weight: bold;
+margin-top: 10px;
+`
+export const TextAssinante = styled.Text`
+color: ${cores.yellow};
+font-size: 13px;
+font-weight: bold;
+margin-top: 3px;
 `
