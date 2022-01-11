@@ -1,6 +1,7 @@
 import { useNavigation } from '@react-navigation/native'
 import React from 'react'
-import { View, Text } from 'react-native'
+import ButtonTrasparent from '../../component/Buttons/ButtonTrasparent'
+import ButtonYellow from '../../component/Buttons/ButtonYellow'
 import * as S from "./styled"
 
 export default function Home() 
@@ -11,29 +12,30 @@ export default function Home()
 
         <S.Content>
             <S.Image source={require("../../assets/img/Perfil.png")}/>
-            
-            <S.ButtonYellow activeOpacity={0.7} onPress={()=> nav.navigate("Perfil")}>
-                <S.TextoYellow>Meu perfil</S.TextoYellow>
-            </S.ButtonYellow>
+            <ButtonYellow texto='Meu perfil'
+                click={()=> nav.navigate("Perfil")}
+                widht={"80%"}
+            />
+
             <S.Image source={require("../../assets/img/CalendarioAmarelo.png")}/>
-            <S.ButtonTransparent activeOpacity={0.7}>
-                <S.TextoTransparent>
-                    Proximos eventos
-                </S.TextoTransparent>
-            </S.ButtonTransparent>
+            
+            <ButtonTrasparent texto='Proximos eventos'
+                click={()=> nav.navigate("Perfil")}
+                widht={"80%"}
+            />
 
             <S.Image source={require("../../assets/img/Perfil.png")}/>
-            <S.ButtonYellow activeOpacity={0.7}>
-                <S.TextoYellow>Área de assinantes</S.TextoYellow>
-            </S.ButtonYellow>
+            <ButtonYellow texto='Área de assinantes'
+                click={()=> nav.navigate("Perfil")}
+                widht={"80%"}
+            />
 
             <S.Image source={require("../../assets/img/Perfil.png")}/>
-            <S.ButtonTransparent activeOpacity={0.7}
-                onPress={()=> nav.navigate("Vantagens")}>
-                <S.TextoTransparent>
-                    Vantages de ser assinante
-                </S.TextoTransparent>
-            </S.ButtonTransparent>
+
+            <ButtonTrasparent texto='Vantages de ser assinante'
+                click={()=> nav.navigate("VantagensMenu")}
+                widht={"80%"}
+            />
 
             </S.Content>
         </S.Container>

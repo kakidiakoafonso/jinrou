@@ -23,16 +23,13 @@ align-self: center;
 `
 
 
-export const ButtonYellow = styled.TouchableOpacity`
-width: 80%;
-height:40px;
-background-color: ${cores.yellow};
-border-radius: 25px;
-justify-content: center;
-align-items: center;
+export const ButtonAddContainer = styled.View`
 position: absolute;
 bottom: 20px;
 align-self: center;
+justify-content: center;
+align-items: center;
+width: 80%;
 `;
 
 export const TextoYellow = styled.Text`

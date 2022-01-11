@@ -5,6 +5,7 @@ import { Ionicons } from '@expo/vector-icons';
 import ListItem from '../../component/Item/ListItem';
 import { useNavigation } from '@react-navigation/native';
 import Modal from '../../component/Modal/Modal';
+import ButtonYellow from '../../component/Buttons/ButtonYellow';
 
 
 export default function Eventos() 
@@ -27,11 +28,13 @@ export default function Eventos()
                 showsVerticalScrollIndicator={false}
             />
 
-            <S.ButtonYellow activeOpacity={0.7} onPress={()=>setmodalVisibility(!modalVisibility)}>
-                <S.TextoYellow>
-                    Adicionar ao carrinho R$ 30.00
-                </S.TextoYellow>
-            </S.ButtonYellow>
+            
+            <S.ButtonAddContainer>
+
+                <ButtonYellow texto='Adicionar ao carrinho R$ 30.00'
+                    click={()=>setmodalVisibility(!modalVisibility)}
+                />
+            </S.ButtonAddContainer>
 
             <Modal visivel={modalVisibility} 
                 setmodalVisibility={()=> setmodalVisibility(!modalVisibility)}/>

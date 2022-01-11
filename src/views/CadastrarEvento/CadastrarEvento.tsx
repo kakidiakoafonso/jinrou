@@ -1,6 +1,5 @@
 import { useNavigation } from '@react-navigation/native'
-import React from 'react'
-import { View, Text } from 'react-native'
+import React,{useState} from 'react'
 import colors from '../../configs/style/colors'
 import * as S from "./styled"
 
@@ -8,13 +7,20 @@ const img = "https://criticalhits.com.br/wp-content/uploads/2019/06/20190616-min
 export default function CadastrarEvento() 
 {
     const borda = {borderBottomColor:colors.yellow,borderBottomWidth:1}
+    const [scrollable, setscrollable] = useState<boolean>(false)
     const nav = useNavigation()
     return (
         <S.Container source={require("../../assets/img/Bg5.png")}>
             <S.Header></S.Header>
-            <S.Content>
+            <S.Content >
+            
                 <S.Image source={{uri:img}}/>
-                <S.Nome>Nome do evento</S.Nome>
+                <S.Nome>Detalhes do evento</S.Nome>
+
+                <S.KeyboardAvoid showsVerticalScrollIndicator={false}
+                // scrollEnabled={true}
+                >
+                    
                 <S.BorderBottomView style={borda}>
                     <S.Label>Nome do evento</S.Label>
                     <S.Input />
@@ -45,6 +51,11 @@ export default function CadastrarEvento()
                         <S.Input />
                     </S.BorderBottomViewSmall>
                 </S.SmallContainer>
+                
+                <S.ButtonAdd>
+                    <S.ImageAdd source={require("../../assets/img/Add.png")}/>
+                </S.ButtonAdd>
+                </S.KeyboardAvoid>
             </S.Content>
         </S.Container>
     )

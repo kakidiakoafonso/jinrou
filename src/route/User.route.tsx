@@ -13,6 +13,7 @@ import Comprado from '../views/Comprado/Comprado';
 import Vantagens from '../views/Vantagens/Vantagens';
 import Perfil from '../views/Perfil/Perfil';
 import HomeStaff from '../views/HomeStaff/HomeStaff';
+import VantagensMenu from '../views/VantagensMenu/VantagensMenu';
 const Stack = createNativeStackNavigator();
 
 const Tab = createBottomTabNavigator();
@@ -22,6 +23,7 @@ function NonAuthenticatedRoute() {
         <Stack.Screen name="Tab" component={MyTabs} />
         <Stack.Screen name="Comprado" component={Comprado}/>
         <Stack.Screen name="Vantagens" component={Vantagens}/>
+        <Stack.Screen name="VantagensMenu" component={VantagensMenu}/>
         <Stack.Screen name="Perfil" component={Perfil}/>
       </Stack.Navigator>
   );

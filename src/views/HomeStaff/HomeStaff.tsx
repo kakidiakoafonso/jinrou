@@ -1,5 +1,7 @@
 import { useNavigation } from '@react-navigation/native'
 import React from 'react'
+import  ButtonTransparent  from '../../component/Buttons/ButtonTrasparent'
+import  ButtonYellow  from '../../component/Buttons/ButtonYellow'
 import * as S from "./styled"
 
 export default function HomeStaff() 
@@ -9,21 +11,15 @@ export default function HomeStaff()
         <S.Container source={require("../../assets/img/Bg2.png")}>
 
         <S.Content>
-            
-            <S.ButtonYellow activeOpacity={0.7} onPress={()=> nav.navigate("CadastrarEvento")}>
-                <S.TextoYellow>Cadastrar evento</S.TextoYellow>
-            </S.ButtonYellow>
 
-            <S.ButtonTransparent activeOpacity={0.7}>
-                <S.TextoTransparent>
-                     Verificar compras
-                </S.TextoTransparent>
-            </S.ButtonTransparent>
+            <ButtonYellow texto='Cadastrar evento' widht={"80%"} 
+                widht={"80%"}
+                click={()=> nav.navigate("CadastrarEvento")}/>
 
-            <S.ButtonYellow activeOpacity={0.7}>
-                <S.TextoYellow>Cadastrar apoiadores</S.TextoYellow>
-            </S.ButtonYellow>
+            <ButtonTransparent texto='Verificar compras' widht={"80%"}/>
 
+            <ButtonYellow texto='Cadastrar apoiadores' widht={"80%"}
+            click={()=>nav.navigate("Apoiador")}/>
             </S.Content>
         </S.Container>
     )
