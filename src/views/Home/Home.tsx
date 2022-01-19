@@ -20,11 +20,11 @@ export default function Home()
             <S.Image source={require("../../assets/img/CalendarioAmarelo.png")}/>
             
             <ButtonTrasparent texto='Proximos eventos'
-                click={()=> nav.navigate("Perfil")}
+                click={()=> nav.navigate("proximoeventos")}
                 widht={"80%"}
             />
 
-            <S.Image source={require("../../assets/img/Perfil.png")}/>
+            <S.Image source={require("../../assets/img/HumanWithOk.png")}/>
             <ButtonYellow texto='Área de assinantes'
                 click={()=> nav.navigate("Perfil")}
                 widht={"80%"}

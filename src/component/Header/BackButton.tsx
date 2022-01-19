@@ -9,10 +9,10 @@ export default function Header({goTo}:Props)
 {
     const nav = useNavigation()
     return (
-        <S.Header>
+        <S.HeaderBack>
                 <S.BackButton onPress={()=> goTo? nav.navigate(goTo):nav.goBack()}>
                     <S.ImageBack source={require("../../assets/img/Flecha.png")}/>
                 </S.BackButton>
-        </S.Header>
+        </S.HeaderBack>
     )
 }

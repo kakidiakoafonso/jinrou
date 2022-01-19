@@ -8,11 +8,14 @@ export default function CustomTabBar({})
     return (
         <S.Container>
             <S.Items>
-                <S.Icon source={require("../../assets/img//Logout.png")}/>
+                <S.Icon source={require("../../assets/img/Logout.png")}/>
                 <S.Label>Logout</S.Label>
             </S.Items>
-            <S.Items onPress={()=> navigation.navigate("Home")}>
-                <S.Icon source={require("../../assets/img/Calendários.png")}/>
+            <S.Items onPress={()=> navigation.navigate("Home")} 
+            style={{justifyContent:'flex-end'}}>
+
+                <S.Logo source={require("../../assets/img/logo-menor.png")} resizeMode='contain'/>
+                {/* <S.Icon source={require("../../assets/img/Calendários.png")}/> */}
                 <S.Label>Meu perfil</S.Label>
             </S.Items>
             <S.Items onPress={()=> navigation.navigate("Eventos")}>

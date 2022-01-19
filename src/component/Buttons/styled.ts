@@ -3,7 +3,7 @@ import cores from "../../configs/style/colors"
 
 
 export const ButtonYellow = styled.TouchableOpacity`
-height:55px;
+height:50px;
 background-color: ${cores.yellow};
 border-radius: 25px;
 justify-content: center;
@@ -12,7 +12,7 @@ align-items: center;
 
 
 export const ButtonTransparent = styled.TouchableOpacity`
-height:55px;
+height:50px;
 background-color: transparent;
 border: 1px solid ${cores.yellow};
 border-radius: 25px;

@@ -20,6 +20,12 @@ background-color: ${colors.yellow};
 justify-content: center;
 align-items:center;
 `
+export const Logo = styled.Image`
+width: 130px;
+height: 130px;
+position: absolute;
+top: -100px;
+`
 export const Wrapper = styled.View`
 width: 90%;
 height: 40%;
@@ -31,9 +37,10 @@ width: 100%;
 height: 30px;
 flex-direction: row;
 justify-content: space-between;
+padding: 0px 5px;
 `
 export const TextoRedBold = styled.Text`
-font-size: 18px;
+font-size: 16px;
 color: ${colors.red};
 font-weight: bold;
 `

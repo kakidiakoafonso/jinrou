@@ -19,6 +19,13 @@ export const Icon = styled.Image`
 width: 60px;
 height: 30px;
 `;
+export const Logo = styled.Image`
+width: 80px;
+height: 80px;
+position: absolute;
+top: -40px;
+`;
 export const Label = styled.Text`
 color: ${cores.red};
+font-weight: bold;
 `;

@@ -32,6 +32,7 @@ width: 220px;
 text-align: center;
 `;
 export const Image = styled.Image`
-width: 220px;
-height: 220px;
+margin-top: 10px;
+width: 230px;
+height: 250px;
 `;

@@ -1,5 +1,6 @@
 import { useNavigation } from '@react-navigation/native'
 import React,{useState} from 'react'
+import Header from '../../component/Header/Header'
 import colors from '../../configs/style/colors'
 import * as S from "./styled"
 
@@ -11,7 +12,7 @@ export default function CadastrarEvento()
     const nav = useNavigation()
     return (
         <S.Container source={require("../../assets/img/Bg5.png")}>
-            <S.Header></S.Header>
+           <Header/>
             <S.Content >
             
                 <S.Image source={{uri:img}}/>

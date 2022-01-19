@@ -6,7 +6,7 @@ import * as S from './styled'
 
 const borda = 
 {
-    borderBottomWidth:2,
+    borderBottomWidth:1,
     borderBottomColor:colors.red,
 }
 
@@ -25,6 +25,8 @@ export default function Modal({visivel,setmodalVisibility}:Props)
             <S.Container>
                 <S.Close  onPress={()=>setmodalVisibility(!visivel)}></S.Close>
                 <S.Content>
+                    <S.Logo source={require('../../assets/img/logo-menor.png')}
+                    resizeMethod='auto' resizeMode='contain'/>
                     <S.Wrapper>
                         <S.InputsContainer style={borda}>
                             <S.TextoRedBold>Evento</S.TextoRedBold>
@@ -34,9 +36,9 @@ export default function Modal({visivel,setmodalVisibility}:Props)
                             <S.TextoRedBold>Desconto de assinante</S.TextoRedBold>
                             <S.TextoRed>50%</S.TextoRed>
                         </S.InputsContainer>
-                        <S.InputsContainer style={borda}>
+                        <S.InputsContainer >
                             <S.TextoRedBold>Evento</S.TextoRedBold>
-                            <S.TextoRed>R$ 15.00</S.TextoRed>
+                            <S.TextoRedBold>R$ 15.00</S.TextoRedBold>
                         </S.InputsContainer>
                     </S.Wrapper>
 
@@ -45,7 +47,7 @@ export default function Modal({visivel,setmodalVisibility}:Props)
                         // setmodalVisibility(!visivel)
                     >
                         <S.TextoYellow>
-                            Comprar
+                            Comprar R$30.00
                         </S.TextoYellow>
                     </S.ButtonYellow>
                 </S.Content>

@@ -6,13 +6,6 @@ flex: 1;
 align-items: center;
 `;
 
-export const Header = styled.View`
-width: 100%;
-height: 200px;
-border-bottom-left-radius: 200px;
-border-bottom-right-radius: 200px;
-background-color: ${cores.yellow};
-`;
 export const Content = styled.View`
 width: 90%;
 height: 200px;
@@ -37,7 +30,7 @@ export const Label = styled.Text`
 color: ${cores.yellow};
 font-weight: bold;
 `;
-export const Text = styled.Text`
+export const Text = styled.TextInput`
 color: ${cores.yellow};
 `;
 
@@ -59,6 +52,20 @@ export const Nome = styled.Text`
 color: ${cores.yellow};
 font-weight: bold;
 font-size: 25px;
+`;
+export const ButtonAdd = styled.TouchableOpacity`
+background-color: transparent;
+width: 60px;
+height: 40px;
+margin-top: 10%;
+margin-right: 10%;
+align-self: flex-end;
+justify-content: center;
+align-items: center;
+`;
+export const AddImage = styled.Image`
+width: 100%;
+height: 70%;
 `;
 
 

@@ -15,6 +15,8 @@ import Perfil from '../views/Apoiador/Apoiador';
 import HomeStaff from '../views/HomeStaff/HomeStaff';
 import Apoiador from '../views/Apoiador/Apoiador';
 import CadastrarEvento from '../views/CadastrarEvento/CadastrarEvento';
+import Compras from '../views/ComprasDetail/Compras';
+import DetalheEvento from '../views/DetalheEvento/DetalheEvento';
 const Stack = createNativeStackNavigator();
 
 const Tab = createBottomTabNavigator();
@@ -48,6 +50,8 @@ function MyTabs() {
     >
       <Tab.Screen name="Home" component={HomeStaff}/>
       <Tab.Screen name="Eventos" component={Eventos}/>
+      <Tab.Screen name="Compras" component={Compras}/>
+      <Tab.Screen name="EventosDetalhe" component={DetalheEvento}/>
     </Tab.Navigator>
   );
 }

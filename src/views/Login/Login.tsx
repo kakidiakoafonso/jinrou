@@ -1,11 +1,29 @@
-import React from 'react'
+import React, { useContext, useState } from 'react'
 import { AntDesign } from '@expo/vector-icons';
 import * as S from "./styled"
+import { UserContexto, useUser } from '../../context/UserContext';
 
-export default function Login() {
+export default function Login() 
+{
+    const [isStaff, setisStaff] = useState(false)
+    const {setUser} = useContext(UserContexto)
+    console.log(setUser);
+    
+    // const handelLogin = () => 
+    // {
+    //     if(isStaff)
+    //     {
+    //         setUser({nome"Kakidiako",tipo:'user'})
+    //     }
+    //     else
+    //     {
+    //         setUser({nome"Kakidiako",tipo:'staff'})
+    //     }
+
+    // }
     return (
         <S.Container source={require("../../assets/img/Bg.png")}>
-
+            
             <S.TopRounded>
                 {/* <S.TopRoundedImage source={require("../../assets/img/YellowThing.png")}></S.TopRoundedImage> */}
                 

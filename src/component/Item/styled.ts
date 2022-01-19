@@ -44,6 +44,8 @@ border-radius: 20px;
 background-color: transparent;
 border: 1px solid ${cores.yellow};
 border-radius: 10px;
+justify-content: center;
+align-items: center;
 `
 
 export const TextNormal = styled.Text`

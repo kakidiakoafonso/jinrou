@@ -15,10 +15,10 @@ export default function VantagensMenu()
 
             <S.Content>
 
-                <ButtonYellow texto='Adicionar vantagens'/>
+                <ButtonYellow texto='Adicionar vantagens'  click={()=>nav.navigate("Vantagens")}/>
 
                 <ButtonTrasparent  texto='Ver vantagens' 
-                    click={()=>nav.navigate("Vantagens")}/>
+                    click={()=>nav.navigate("Vervantagens")}/>
 
             </S.Content>
         </S.Container>

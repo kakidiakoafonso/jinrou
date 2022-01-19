@@ -8,7 +8,7 @@ import Modal from '../../component/Modal/Modal';
 import ButtonYellow from '../../component/Buttons/ButtonYellow';
 
 
-export default function Eventos() 
+export default function ProximosEventos() 
 {
     const [modalVisibility, setmodalVisibility] = useState<boolean>(false)
     const nav = useNavigation()

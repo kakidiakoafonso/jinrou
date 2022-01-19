@@ -8,6 +8,11 @@ background-color: ${cores.yellow};
 border-bottom-left-radius: 250px;
 border-bottom-right-radius: 250px;
 `
+export const HeaderBack = styled.View`
+width: 100%;
+height: 80px;
+background-color: transparent;
+`
 export const BackButton = styled.TouchableOpacity`
 position: absolute;
 top: 30px;

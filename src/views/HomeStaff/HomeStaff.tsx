@@ -16,7 +16,9 @@ export default function HomeStaff()
                 widht={"80%"}
                 click={()=> nav.navigate("CadastrarEvento")}/>
 
-            <ButtonTransparent texto='Verificar compras' widht={"80%"}/>
+            <ButtonTransparent texto='Verificar compras' widht={"80%"}
+                 click={()=> nav.navigate("Compras")}
+            />
 
             <ButtonYellow texto='Cadastrar apoiadores' widht={"80%"}
             click={()=>nav.navigate("Apoiador")}/>
