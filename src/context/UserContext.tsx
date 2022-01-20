@@ -8,19 +8,14 @@ type IUser = {
 type Props = {
     children: React.ReactNode
 }
-export const UserContexto = createContext()
+export const UserContexto = createContext({})
 export default function UserContext({children}:Props) 
 {
-    const [User, setUser] = useState<IUser>({} as IUser)
+    const [user, setuser] = useState(false);
+    const [staff, setstaff] = useState(false);
     return (
-        <UserContexto.Provider value={{User,setUser}}>
+        <UserContexto.Provider value={{user,setuser,staff,setstaff}}>
             {children}
         </UserContexto.Provider>
     )
-}
-
-export const useUser = () =>
-{
-    const Contexts = useContext(UserContexto)
-    return Contexts
 }

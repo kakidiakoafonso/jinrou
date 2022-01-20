@@ -3,21 +3,19 @@ import { NavigationContainer } from '@react-navigation/native';
 import UserRoute from './User.route';
 import StaffRoute from './Staff.route';
 import NonAuthenticatedRoute from './NonAuthenticated.route';
-import { useUser } from '../context/UserContext';
+import { UserContexto } from '../context/UserContext';
 
 export default function Route() 
 {
-  const {User} = useUser()
-  // User.nome = "Kakidiako"
-  // User.tipo = "staff"
-  console.log(User);
+  const {user,staff} = React.useContext(UserContexto)
+    console.log(user);
   
   return (
     <NavigationContainer>
-        {User===null ? <NonAuthenticatedRoute/>
-        :
-        User.tipo==='staff'? 
-        <StaffRoute/> : <UserRoute/>}
+        {user===false && staff===false  && <NonAuthenticatedRoute/>}
+        
+        {user && <UserRoute/>}
+        {staff && <StaffRoute/>}
     </NavigationContainer>
   );
 }

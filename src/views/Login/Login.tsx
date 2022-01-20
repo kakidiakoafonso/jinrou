@@ -5,22 +5,23 @@ import { UserContexto, useUser } from '../../context/UserContext';
 
 export default function Login() 
 {
-    const [isStaff, setisStaff] = useState(false)
-    const {setUser} = useContext(UserContexto)
-    console.log(setUser);
+    const [iStaff, setiStaff] = useState(false);
+    const {setuser,setstaff} = useContext(UserContexto)
+    // console.log(user);
+    const handleLogin =()=>
+    {
+        if(iStaff)
+        {
+            setstaff(true)
+            setuser(false)
+        }
+        else
+        {
+            setstaff(false)
+            setuser(true)
+        }
+    }
     
-    // const handelLogin = () => 
-    // {
-    //     if(isStaff)
-    //     {
-    //         setUser({nome"Kakidiako",tipo:'user'})
-    //     }
-    //     else
-    //     {
-    //         setUser({nome"Kakidiako",tipo:'staff'})
-    //     }
-
-    // }
     return (
         <S.Container source={require("../../assets/img/Bg.png")}>
             
@@ -47,15 +48,16 @@ export default function Login()
                     />
             </S.InputContainer>
 
-            <S.ButtonEntrar activeOpacity={0.7}>
+            <S.ButtonEntrar activeOpacity={0.7}
+            onPress={handleLogin}>
                 <S.TextoEntrar>
-                    Entrar
+                    Entrar {iStaff? "como staff":"como usuario"}
                 </S.TextoEntrar>
             </S.ButtonEntrar>
 
-            <S.ButtonStaffArea activeOpacity={0.7}>
+            <S.ButtonStaffArea activeOpacity={0.7} onPress={()=>setiStaff(!iStaff)}>
                 <S.TextoStaff>
-                    Área da staff
+                    {!iStaff? "Mudar para staff": "Mudar para usuario"}
                 </S.TextoStaff>
             </S.ButtonStaffArea>
 

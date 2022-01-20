@@ -1,13 +1,22 @@
 import { useNavigation } from '@react-navigation/native'
 import React from 'react'
+import { UserContexto } from '../../context/UserContext'
 import * as S from "./styled"
 
 export default function CustomTabBar({}) 
 {
+    const {setuser,setstaff,user,staff} = React.useContext(UserContexto)
+    
+    const handleLogout = () =>
+    {
+        setstaff(false)
+        setuser(false)            
+    }
+
     const navigation = useNavigation()
     return (
         <S.Container>
-            <S.Items>
+            <S.Items onPress={handleLogout}>
                 <S.Icon source={require("../../assets/img/Logout.png")}/>
                 <S.Label>Logout</S.Label>
             </S.Items>
