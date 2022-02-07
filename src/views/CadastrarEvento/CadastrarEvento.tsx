@@ -1,6 +1,7 @@
 import { useNavigation } from '@react-navigation/native'
 import React,{useState} from 'react'
 import Header from '../../component/Header/Header'
+import KeyBoardAvoidWrapper from '../../component/KeyBoardAvoidWrapper'
 import colors from '../../configs/style/colors'
 import * as S from "./styled"
 
@@ -11,6 +12,7 @@ export default function CadastrarEvento()
     const [scrollable, setscrollable] = useState<boolean>(false)
     const nav = useNavigation()
     return (
+        <KeyBoardAvoidWrapper>
         <S.Container source={require("../../assets/img/Bg5.png")}>
            <Header/>
             <S.Content >
@@ -59,5 +61,6 @@ export default function CadastrarEvento()
                 </S.KeyboardAvoid>
             </S.Content>
         </S.Container>
+        </KeyBoardAvoidWrapper>
     )
 }

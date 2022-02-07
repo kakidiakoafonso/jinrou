@@ -2,6 +2,7 @@ import { useNavigation } from '@react-navigation/native'
 import React from 'react'
 import { View, Text } from 'react-native'
 import Header from '../../component/Header/Header'
+import KeyBoardAvoidWrapper from '../../component/KeyBoardAvoidWrapper'
 import colors from '../../configs/style/colors'
 import * as S from "./styled"
 
@@ -11,6 +12,7 @@ export default function Apoiador()
     const borda = {borderBottomColor:colors.yellow,borderBottomWidth:1}
     const nav = useNavigation()
     return (
+        <KeyBoardAvoidWrapper>
         <S.Container source={require("../../assets/img/Bg5.png")}>
             <Header/>
             <S.Content>
@@ -40,5 +42,6 @@ export default function Apoiador()
                 <S.AddImage source={require('../../assets/img/Add.png')}/>
             </S.ButtonAdd>
         </S.Container>
+        </KeyBoardAvoidWrapper>
     )
 }

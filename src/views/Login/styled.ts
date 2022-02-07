@@ -48,6 +48,7 @@ width: 80%;
 height: 90%;
 font-size: 19px;
 font-weight: bold;
+color: #ccc;
 `;
 
 
