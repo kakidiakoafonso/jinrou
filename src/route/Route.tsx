@@ -3,19 +3,19 @@ import { NavigationContainer } from '@react-navigation/native';
 import UserRoute from './User.route';
 import StaffRoute from './Staff.route';
 import NonAuthenticatedRoute from './NonAuthenticated.route';
-import { UserContexto } from '../context/UserContext';
+import { reducerState } from '../redux/rootReducer';
+import {useDispatch,useSelector} from 'react-redux'
 
 export default function Route() 
 {
-  const {user,staff} = React.useContext(UserContexto)
-    console.log(user);
   
+  const USER_TYPE = useSelector<reducerState,"STAFF" | "USER" | null>(state=> state.contextReducer.user)  
   return (
     <NavigationContainer>
-        {user===false && staff===false  && <NonAuthenticatedRoute/>}
+        {USER_TYPE===null  && <NonAuthenticatedRoute/>}
         
-        {user && <UserRoute/>}
-        {staff && <StaffRoute/>}
+        {USER_TYPE==="USER" && <UserRoute/>}
+        {USER_TYPE==="STAFF" && <StaffRoute/>}
     </NavigationContainer>
   );
 }

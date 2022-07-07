@@ -1,26 +1,25 @@
 import React, { useContext, useState } from 'react'
 import { AntDesign } from '@expo/vector-icons';
+import {useDispatch,useSelector} from 'react-redux'
+import { dispatchLogin } from "../../redux/user/user.dispatch";
+import { user,staff } from "../../redux/userContext/context.action";
 import * as S from "./styled"
-import { UserContexto, useUser } from '../../context/UserContext';
+import { reducerState } from '../../redux/rootReducer';
+import { ActivityIndicator } from 'react-native';
 
 export default function Login() 
 {
-    const [iStaff, setiStaff] = useState(false);
-    const {setuser,setstaff} = useContext(UserContexto)
-    // console.log(user);
-    const handleLogin =()=>
-    {
-        if(iStaff)
-        {
-            setstaff(true)
-            setuser(false)
-        }
-        else
-        {
-            setstaff(false)
-            setuser(true)
-        }
-    }
+    const [email, setemail] = useState<string>('')
+    const [password, setpassword] = useState<string>('')
+    const [iStaff, setiStaff] = useState<boolean>(false)
+   const dispatch = useDispatch()
+   const isLoading = useSelector<reducerState,boolean>(state=> state.userReducer.loading)
+
+   function handleLogin() {
+    const FinalEmail:string = email;
+    const FinalPassword:string = password;
+    dispatch(dispatchLogin(FinalEmail,FinalPassword,()=>dispatch(user())));
+   }
     
     return (
         <S.Container source={require("../../assets/img/Bg.png")}>
@@ -35,8 +34,10 @@ export default function Login()
             <S.InputContainer>
                 <AntDesign name="user" size={24} color="#ccc" />
                 <S.Input 
-                    placeholder='Usuário'
+                    placeholder='Email'
                     placeholderTextColor={"#ccc"}
+                    value={email}
+                    onChangeText={e=>setemail(e)}
                     />
             </S.InputContainer>
 
@@ -45,17 +46,24 @@ export default function Login()
                 <S.Input 
                     placeholder='Senha'
                     placeholderTextColor={"#ccc"}
+                    value={password}
+                    onChangeText={e=>setpassword(e)}
                     />
             </S.InputContainer>
 
             <S.ButtonEntrar activeOpacity={0.7}
-            onPress={handleLogin}>
-                <S.TextoEntrar>
-                    Entrar {iStaff? "como staff":"como usuario"}
-                </S.TextoEntrar>
+            onPress={handleLogin} disabled={isLoading}>
+                {
+                    isLoading?
+                    <ActivityIndicator size={30} color={'#000'}/>
+                    :
+                    <S.TextoEntrar>
+                        Entrar {iStaff? "como staff":null}
+                    </S.TextoEntrar>
+                }
             </S.ButtonEntrar>
 
-            <S.ButtonStaffArea activeOpacity={0.7} onPress={()=>setiStaff(!iStaff)}>
+            <S.ButtonStaffArea activeOpacity={0.7} onPress={()=> setiStaff(prev=>!prev)}>
                 <S.TextoStaff>
                     {!iStaff? "Mudar para staff": "Mudar para usuario"}
                 </S.TextoStaff>
@@ -63,7 +71,7 @@ export default function Login()
 
             <S.TextoInfoWrapper>
                 <S.TextoInfo>Não tem cadastro?</S.TextoInfo>
-                <S.ButtonCadastrar activeOpacity={0.7}>
+                <S.ButtonCadastrar activeOpacity={0.7} >
                     <S.TextoInfo>Cadastrar-se</S.TextoInfo>
                 </S.ButtonCadastrar>
             </S.TextoInfoWrapper>
