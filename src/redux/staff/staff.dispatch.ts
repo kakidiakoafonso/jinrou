@@ -1,37 +1,33 @@
-import { login, loginError, loginSucess } from "./user.action";
+import { login, loginError, loginSucess } from "./staff.action";
 import api from "../../service/api";
 export function dispatchLogin(
   email: string,
   password: string,
-  callback: (sucess:'error'|'sucess'|'denied'|'ghostUser')  => void
+  callback: (sucess:'error'|'sucess'|'denied'|'ghostUser') => void
 ) {
   return (dispatch: any) => {
     dispatch(login());
     api
-      .post("user/login", { email, password })
+      .post("staff/login", { email, password })
       .then((response) => {
-        const user = response.data;
-        if (Object.keys(user).length === 0 && user.constructor === Object) {
+        const staff = response.data;
+        if (Object.keys(staff).length === 0 && staff.constructor === Object) {
           dispatch(loginError("Usuario nao existe"));
           console.log("Senha errada");
           callback('ghostUser');
         } else {
-          if (user.status === 401) {
+          if (staff.status === 401) {
             dispatch(loginError("Senha errada"));
             callback('denied');
           } else {
-            dispatch(loginSucess(user));
+            dispatch(loginSucess(staff));
             console.log("Senha certa");
             callback('sucess');
           }
         }
-
-        console.log(response.data);
-        setTimeout(() => callback, 2000);
       })
       .catch((error) => {
         dispatch(loginError(error));
-        alert("Erro ao fazer login");
         callback('error');
       });
   };

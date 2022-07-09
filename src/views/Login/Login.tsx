@@ -6,19 +6,61 @@ import { user,staff } from "../../redux/userContext/context.action";
 import * as S from "./styled"
 import { reducerState } from '../../redux/rootReducer';
 import { ActivityIndicator } from 'react-native';
+import { Alert } from '../../component/Alert/Alert';
 
 export default function Login() 
 {
     const [email, setemail] = useState<string>('')
     const [password, setpassword] = useState<string>('')
     const [iStaff, setiStaff] = useState<boolean>(false)
+    const [error, seterror] = useState<boolean>(false)
+    const [message, setmessage] = useState<string>('')
+    const [showModal, setshowModal] = useState<boolean>(false)
    const dispatch = useDispatch()
    const isLoading = useSelector<reducerState,boolean>(state=> state.userReducer.loading)
+   const acessGrantedhandler = (result:'error'|'sucess'|'denied'|'ghostUser'):void =>
+   {
+    console.log(result);
+    
+        if(result==='error')
+        {
+            seterror(true)
+            setmessage('Erro ao autenticar')
+            setshowModal(true)
+        }
+        if(result==='sucess')
+        {
+            seterror(false)
+            setmessage('Autenticado com sucesso')
+            setshowModal(true)
+            setTimeout(()=>
+            {
+                if(iStaff)dispatch(staff())
+                else dispatch(user())
+                setshowModal(false)
+            }
+            ,2000)
+        }
+        if(result==='denied')
+        {
+            seterror(true)
+            setmessage('Senha incorreta')
+            setshowModal(true)
+        }
+        if(result==='ghostUser')
+        {
+            seterror(true)
+            setmessage('Uusuário não cadastrado.')
+            setshowModal(true)
+        }
+   }
 
-   function handleLogin() {
-    const FinalEmail:string = email;
-    const FinalPassword:string = password;
-    dispatch(dispatchLogin(FinalEmail,FinalPassword,()=>dispatch(user())));
+   function handleLogin() 
+   {
+    const FinalEmail:string = 'kakidiako@brut.ao';
+    const FinalPassword:string = '123456';
+    if(iStaff) dispatch(dispatchLogin(FinalEmail,FinalPassword,acessGrantedhandler));
+    else dispatch(dispatchLogin(FinalEmail,FinalPassword,acessGrantedhandler));
    }
     
     return (
@@ -77,6 +119,9 @@ export default function Login()
             </S.TextoInfoWrapper>
 
             </S.ContentContainer>
+            <Alert message={message} isError={error} 
+                visible={showModal} isLogin={true}
+                setmodalVisibility={()=>setshowModal(false)}/>
         </S.Container>
     )
 }

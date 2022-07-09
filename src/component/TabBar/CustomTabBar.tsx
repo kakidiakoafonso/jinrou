@@ -1,16 +1,16 @@
 import { useNavigation } from '@react-navigation/native'
 import React from 'react'
-import { UserContexto } from '../../context/UserContext'
+import { useDispatch } from 'react-redux'
+import {  clean} from '../../redux/userContext/context.action'
 import * as S from "./styled"
 
 export default function CustomTabBar({}) 
 {
-    const {setuser,setstaff,user,staff} = React.useContext(UserContexto)
+    const dispatch = useDispatch()
     
     const handleLogout = () =>
     {
-        setstaff(false)
-        setuser(false)            
+        dispatch(clean())          
     }
 
     const navigation = useNavigation()

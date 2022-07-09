@@ -1,4 +1,4 @@
-import React,{useState} from 'react'
+import React,{useEffect, useState} from 'react'
 import * as S from './styled'
 import cores from "../../configs/style/colors"
 import { Ionicons } from '@expo/vector-icons';
@@ -6,11 +6,22 @@ import ListItem from '../../component/Item/ListItem';
 import { useNavigation } from '@react-navigation/native';
 import Modal from '../../component/Modal/Modal';
 import ButtonYellow from '../../component/Buttons/ButtonYellow';
+import { useDispatch, useSelector } from 'react-redux';
+import { reducerState } from '../../redux/rootReducer';
+import { Event ,dispatchEvents} from '../../redux/events';
 
 
 export default function ProximosEventos() 
 {
+    const dispatch = useDispatch()
     const [modalVisibility, setmodalVisibility] = useState<boolean>(false)
+    const events = useSelector<reducerState,Event[]>(state=> state.eventReducer.event)
+    const isloading = useSelector<reducerState,boolean>(state=> state.eventReducer.loading)
+    console.log(events);
+    useEffect(()=>{
+        dispatch(dispatchEvents())
+    },[])
+    
     const nav = useNavigation()
     return (
         <S.Container source={require("../../assets/img/Bg4.png")}>
@@ -22,9 +33,9 @@ export default function ProximosEventos()
 
 
             <S.FlatList
-                data={[1,2,3,4,5,6,7]}
+                data={events}
                 keyExtractor={(e)=> String(e)}
-                renderItem={()=><ListItem checkbox normal assinante/>}
+                renderItem={({item}:{item:Event})=><ListItem checkbox event={item}/>}
                 showsVerticalScrollIndicator={false}
             />
 
