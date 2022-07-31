@@ -11,6 +11,7 @@ const img = "https://criticalhits.com.br/wp-content/uploads/2019/06/20190616-min
 export default function Perfil() 
 {
     const user = useSelector<reducerState,User>(state=> state.userReducer.user)
+    const isSubscribed = useSelector<reducerState,boolean>(state=> state.userReducer.user.subscriber)
     const borda = {borderBottomColor:colors.yellow,borderBottomWidth:1}
     const nav = useNavigation()
     return (
@@ -34,8 +35,10 @@ export default function Perfil()
                         <S.Text>{user.birth_day}</S.Text>
                     </S.BorderBottomViewSmall>
                     <S.BorderBottomViewSmall style={borda}>
-                        <S.Label>Data de expiração:</S.Label>
-                        <S.Text>{user.expiration_date}</S.Text>
+                        <S.Label>Assinatura:</S.Label>
+                            <S.Text> {isSubscribed ? 
+                                user.expiration_date:'Não é assinante'}
+                            </S.Text>
                     </S.BorderBottomViewSmall>
                 </S.SmallContainer>
             </S.Content>

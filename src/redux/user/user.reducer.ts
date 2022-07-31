@@ -1,14 +1,14 @@
 import * as actionTypes from "./user.constant";
 import { User } from "./user.types";
 export type IUserReducerState = {
-  user: User | [];
+  user: User ;
   loading: boolean;
   error: string;
 };
 const initialState: IUserReducerState = {
   error: "",
   loading: false,
-  user: [],
+  user: {} as User,
 };
 
 type IAction = {

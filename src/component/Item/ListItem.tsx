@@ -4,15 +4,17 @@ import colors from '../../configs/style/colors'
 import * as S from './styled'
 import { Event, removeEvents } from '../../redux/events';
 import api from '../../service/api';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Alert } from '../Alert/Alert';
+import { cartAdd, cartRemove } from '../../redux/cart';
+import { reducerState } from '../../redux/rootReducer';
 
 
 type Props =  
 {
     checkbox?:boolean,
     event:Event,
-    isStaff:boolean,
+    isStaff?:boolean,
 }
 const img = "https://ovicio.com.br/wp-content/uploads/2021/03/20210315-attack-on-titan-eren_7jay-555x555.png"
 export default function ListItem({checkbox,event,isStaff=false}:Props) 
@@ -20,11 +22,24 @@ export default function ListItem({checkbox,event,isStaff=false}:Props)
     const [showModal, setshowModal] = useState<boolean>(false)
     const [message, setmessage] = useState<string>('')
     const [error, seterror] = useState<boolean>(false)
+    const [checked, setchecked] = useState<boolean>(false)
     const dispatch = useDispatch()
     function handlePress()
     {
-        setchecked(prev=>!prev)
+        if(checked)
+        {
+            dispatch(cartRemove(event))
+            setchecked(prev=>!prev)
+        }
+        else
+        {
+            dispatch(cartAdd(event))
+            setchecked(prev=>!prev)
+        }
+        
+        
     }
+
     function handleDelete()
     {
         api.delete('/events/'+event.id).then(res=>{
@@ -41,7 +56,6 @@ export default function ListItem({checkbox,event,isStaff=false}:Props)
             setshowModal(true)
         })
     }
-    const [checked, setchecked] = useState<boolean>(false)
     return (
         <S.Container>
             {

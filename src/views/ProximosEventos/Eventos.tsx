@@ -15,8 +15,24 @@ export default function ProximosEventos()
 {
     const dispatch = useDispatch()
     const [modalVisibility, setmodalVisibility] = useState<boolean>(false)
+    const [totalPrice, settotalPrice] = useState<number>(0)
     const events = useSelector<reducerState,Event[]>(state=> state.eventReducer.event)
     const isloading = useSelector<reducerState,boolean>(state=> state.eventReducer.loading)
+    const cart = useSelector<reducerState,Event[]>(state=>state.cartReducer)
+    const isSubscriber = useSelector<reducerState,boolean>(state=>state.userReducer.user.subscriber)
+    console.log(cart.length);
+    React.useEffect(()=>{
+        if(cart.length!==0)
+        {
+            let price:number = 0
+        cart.forEach(event => {
+            if(isSubscriber) price+= Number(event.subscriber_price)
+            else price+= Number(event.price)
+        });
+        settotalPrice(price)
+        }
+        else settotalPrice(0)
+    },[cart])
     console.log(events);
     useEffect(()=>{
         dispatch(dispatchEvents())
@@ -34,21 +50,22 @@ export default function ProximosEventos()
 
             <S.FlatList
                 data={events}
-                keyExtractor={(e)=> String(e)}
-                renderItem={({item}:{item:Event})=><ListItem checkbox event={item}/>}
+                keyExtractor={(item)=> String(item.id)}
+                renderItem={({item}:{item:Event})=><ListItem checkbox event={item} />}
                 showsVerticalScrollIndicator={false}
             />
 
             
             <S.ButtonAddContainer>
 
-                <ButtonYellow texto='Adicionar ao carrinho R$ 30.00'
+                <ButtonYellow  texto={cart.length==0 ? 'Carrinho vazio':`Adicionar ao carrinho R$ ${totalPrice}`}
                     click={()=>setmodalVisibility(!modalVisibility)}
+                    disabled={cart.length==0}
                 />
             </S.ButtonAddContainer>
 
             <Modal visivel={modalVisibility} 
-                setmodalVisibility={()=> setmodalVisibility(!modalVisibility)}/>
+                setmodalVisibility={()=> setmodalVisibility(!modalVisibility)} total={totalPrice}/>
         </S.Container>
     )
 }
