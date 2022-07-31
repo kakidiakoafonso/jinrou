@@ -12,7 +12,7 @@ export default function Home()
     const userType = useSelector<reducerState,"STAFF" | "USER" | null>(state=> state.contextReducer.user)
     
     function handleAreaAssinantes(){
-        if(userType==="USER") nav.navigate("Vantagens")
+        if(userType==="USER") nav.navigate("uservantagens")
         else nav.navigate("VantagensMenu")
     }
     return (

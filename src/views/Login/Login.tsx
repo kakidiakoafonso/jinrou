@@ -57,7 +57,7 @@ export default function Login()
 
    function handleLogin() 
    {
-    const FinalEmail:string = 'kakidiako@brut.ao';
+    const FinalEmail:string = 'kakidiako11@gmail.com';
     const FinalPassword:string = '123456';
     if(iStaff) dispatch(dispatchLogin(FinalEmail,FinalPassword,acessGrantedhandler));
     else dispatch(dispatchLogin(FinalEmail,FinalPassword,acessGrantedhandler));

@@ -1,0 +1,5 @@
+export const GET_ADVANTAGE = "GET_ADVANTAGE";
+export const LOADED = 'LOADED';
+export const ERROR = 'ERROR';
+export const CREATE_ADVANTAGE = 'CREATE_ADVANTAGE';
+export const REMOVE_ADVANTAGE = 'REMOVE_ADVANTAGE';
