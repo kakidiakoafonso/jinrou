@@ -28,7 +28,7 @@ export default function ListItem({purchases}:Props)
     },[])
     return (
         <S.Container activeOpacity={0.7}
-        onPress={()=> nav.navigate('EventosDetalhe')}>
+            onPress={()=> nav.navigate('EventosDetalhe')}>
            
             <S.Image source={{uri:img}}/>
             <S.Contents>

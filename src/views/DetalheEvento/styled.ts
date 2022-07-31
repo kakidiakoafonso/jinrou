@@ -25,10 +25,11 @@ export const Titulo = styled.Text`
 color: ${colors.yellow};
 font-size: 22px;
 font-weight: bold;
+margin-top: 10px;
 `;
 export const FlatListContainer = styled.View`
 width: 80%;
-height: 45%;
+/* height: 45%; */
 margin-top: 80px;
 padding-bottom: 20px;
 `;
