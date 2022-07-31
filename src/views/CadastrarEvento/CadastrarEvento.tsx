@@ -22,9 +22,10 @@ export default function CadastrarEvento()
     const [name, setname] = useState<string>('')
     const [description, setdescription] = useState<string>('')
     const [date, setdate] = useState<string>('')
-    const [expirationDate, setexpirationDate] = useState<string>('')
+    const [subscriber_price, setSubscriber_price] = useState<string>('')
     const [price, setprice] = useState<string>('')
-    const [subcriberPrice, setsubcriberPrice] = useState<string>('')
+    const [local, setLocal] = useState<string>('')
+    const [avatar, setAvatar] = useState<string>('avatar')
 
     const [showModal, setShowModal] = useState<boolean>(false)
     const [message, setMessage] = useState<string>('')
@@ -49,13 +50,19 @@ export default function CadastrarEvento()
         setIsloading(true)
         api.post('/events',{
             name, description, date, 
-            price, subscriber_price: subcriberPrice, local: 'local ainda nao definido'
+            price, subscriber_price, local,avatar
         }).then(response => {
             setIsloading(false)
             console.log(response)
             dispatch(dispatchEvents())
             setMessage('Evento criado com sucesso')
             setShowModal(true)
+            setLocal('')
+            setdate('')
+            setdescription('')
+            setprice('')
+            setSubscriber_price('')
+            setname('')
         }).catch(error => {
             console.log(error);
             setIsloading(false)
@@ -94,18 +101,19 @@ export default function CadastrarEvento()
                         <S.Input value={date} onChangeText={e=>setdate(e)}/>
                     </S.BorderBottomViewSmall>
                     <S.BorderBottomViewSmall style={borda}>
-                        <S.Label>Preço do ingresso </S.Label>
-                        <S.Input value={price} onChangeText={e=>setprice(e)}/>
+                        <S.Label>Local </S.Label>
+                        <S.Input value={local} onChangeText={e=>setLocal(e)}/>
                     </S.BorderBottomViewSmall>
                 </S.SmallContainer>
                 <S.SmallContainer>
-                    {/* <S.BorderBottomViewSmall style={borda}>
-                        <S.Label>Aniversario:</S.Label>
-                        <S.Input />
-                    </S.BorderBottomViewSmall> */}
+                    
                     <S.BorderBottomViewSmall style={borda}>
-                        <S.Label>Data de expiração:</S.Label>
-                        <S.Input value={expirationDate} onChangeText={e=>setexpirationDate(e)}/>
+                        <S.Label>Preço do ingresso </S.Label>
+                        <S.Input value={price} onChangeText={e=>setprice(e)}/>
+                    </S.BorderBottomViewSmall>
+                    <S.BorderBottomViewSmall style={borda}>
+                        <S.Label>Preço assinante </S.Label>
+                        <S.Input value={subscriber_price} onChangeText={e=>setSubscriber_price(e)}/>
                     </S.BorderBottomViewSmall>
                 </S.SmallContainer>
                 
