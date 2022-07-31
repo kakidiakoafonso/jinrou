@@ -25,6 +25,7 @@ export default function Apoiador()
     const [validation, setvalidation] = useState<string>('')
     const [description, setdescription] = useState<string>('')
     const [subscriber_discount, setsubscriber_discount] = useState<string>('')
+    const [avatar, setAvatar] = useState<string>('')
 
     const [showModal, setShowModal] = useState<boolean>(false)
     const [message, setMessage] = useState<string>('')
@@ -38,7 +39,8 @@ export default function Apoiador()
             name,
             description,
             validation,
-            subscriber_discount
+            subscriber_discount,
+            avatar
         })
         .then(response => {
             setisloading(false)

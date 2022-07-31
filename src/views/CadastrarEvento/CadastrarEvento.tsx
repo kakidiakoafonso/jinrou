@@ -9,6 +9,7 @@ import colors from '../../configs/style/colors'
 import { dispatchEvents } from '../../redux/events'
 import api from '../../service/api'
 import * as S from "./styled"
+import * as ImagePicker from 'expo-image-picker';
 
 const img = "https://criticalhits.com.br/wp-content/uploads/2019/06/20190616-minato-kunai-01.jpg"
 export default function CadastrarEvento() 
@@ -31,43 +32,73 @@ export default function CadastrarEvento()
     const [message, setMessage] = useState<string>('')
     const [error , setError] = useState<boolean>(false)
 
+    const [image, setImage] = useState<string>(img);
 
+  const pickImage = async () => {
+    // No permissions request is necessary for launching the image library
+        let result = await ImagePicker.launchImageLibraryAsync({
+        mediaTypes: ImagePicker.MediaTypeOptions.All,
+        allowsEditing: true,
+        aspect: [4, 3],
+        quality: 1,
+        });
+        if (!result.cancelled && result.type=='image') 
+        {
+        result.type
+        setImage(result.uri);
+        }
+    };
     async function handleCreateEvent()
     {
-        // const newEvent = FormData();
-        // newEvent.append('name', name)
-        // newEvent.append('description', description)
-        // newEvent.append('date', date)
-        // // newEvent.append('expirationDate', expirationDate)
-        // newEvent.append('price', price)
-        // newEvent.append('subscriber_price', subcriberPrice)
-        // newEvent.append('local', 'local')
-        // const response = await api.post('/events',{newEvent},
-        // {
-        //     headers: {"Content-Type": "multipart/form-data"}
+        const newEvent = new FormData();
+        newEvent.append('file', {
+            name: new Date() + '_profile',
+            uri:image,
+            type:'image'
+
+        })
+        // console.log(newEvent);
+        
+        // setIsloading(true)
+        // api.post('/events',{
+        //     name, description, date, 
+        //     price, subscriber_price, local,avatar
+        // }).then(response => {
+        //     setIsloading(false)
+        //     console.log(response)
+        //     dispatch(dispatchEvents())
+        //     setMessage('Evento criado com sucesso')
+        //     setShowModal(true)
+        //     setLocal('')
+        //     setdate('')
+        //     setdescription('')
+        //     setprice('')
+        //     setSubscriber_price('')
+        //     setname('')
+        // }).catch(error => {
+        //     console.log(error);
+        //     setIsloading(false)
+        //     setError(true)
+        //     setMessage('Erro ao criar evento')
+            
         // })
-        // console.log(name,description,date,expirationDate,price,subcriberPrice)
+
         setIsloading(true)
-        api.post('/events',{
-            name, description, date, 
-            price, subscriber_price, local,avatar
+        api.post('/events/upload', newEvent,{
+            headers:{
+                Accept:'application/json', 
+                "Content-Type": "multipart/form-data",
+            }
         }).then(response => {
             setIsloading(false)
             console.log(response)
-            dispatch(dispatchEvents())
-            setMessage('Evento criado com sucesso')
+            setMessage('Upload criado com sucesso')
             setShowModal(true)
-            setLocal('')
-            setdate('')
-            setdescription('')
-            setprice('')
-            setSubscriber_price('')
-            setname('')
         }).catch(error => {
             console.log(error);
             setIsloading(false)
             setError(true)
-            setMessage('Erro ao criar evento')
+            setMessage('Erro no upload')
             
         })
     }
@@ -78,7 +109,9 @@ export default function CadastrarEvento()
            <Header/>
             <S.Content >
             
-                <S.Image source={{uri:img}}/>
+                <S.ImageButton onPress={pickImage}>
+                    <S.Image source={{uri:image}}/>
+                </S.ImageButton>
                 <S.Nome>Detalhes do evento</S.Nome>
 
                 <S.KeyboardAvoid showsVerticalScrollIndicator={false}
