@@ -26,7 +26,6 @@ export default function CadastrarEvento()
     const [subscriber_price, setSubscriber_price] = useState<string>('')
     const [price, setprice] = useState<string>('')
     const [local, setLocal] = useState<string>('')
-    const [avatar, setAvatar] = useState<string>('avatar')
 
     const [showModal, setShowModal] = useState<boolean>(false)
     const [message, setMessage] = useState<string>('')
@@ -55,36 +54,16 @@ export default function CadastrarEvento()
             name: new Date() + '_profile',
             uri:image,
             type:'image'
-
         })
-        // console.log(newEvent);
-        
-        // setIsloading(true)
-        // api.post('/events',{
-        //     name, description, date, 
-        //     price, subscriber_price, local,avatar
-        // }).then(response => {
-        //     setIsloading(false)
-        //     console.log(response)
-        //     dispatch(dispatchEvents())
-        //     setMessage('Evento criado com sucesso')
-        //     setShowModal(true)
-        //     setLocal('')
-        //     setdate('')
-        //     setdescription('')
-        //     setprice('')
-        //     setSubscriber_price('')
-        //     setname('')
-        // }).catch(error => {
-        //     console.log(error);
-        //     setIsloading(false)
-        //     setError(true)
-        //     setMessage('Erro ao criar evento')
-            
-        // })
 
+        newEvent.append('name',name)
+        newEvent.append('date',date)
+        newEvent.append('price',price)
+        newEvent.append('local',local)
+        newEvent.append('description',description)
+        newEvent.append('subscriber_price',subscriber_price)
         setIsloading(true)
-        api.post('/events/upload', newEvent,{
+        api.post('/events', newEvent,{
             headers:{
                 Accept:'application/json', 
                 "Content-Type": "multipart/form-data",
@@ -92,13 +71,21 @@ export default function CadastrarEvento()
         }).then(response => {
             setIsloading(false)
             console.log(response)
-            setMessage('Upload criado com sucesso')
+            dispatch(dispatchEvents())
+            setError(false)
+            setMessage('Evento criado com sucesso')
             setShowModal(true)
+            setLocal('')
+            setdate('')
+            setdescription('')
+            setprice('')
+            setSubscriber_price('')
+            setname('')
         }).catch(error => {
             console.log(error);
             setIsloading(false)
             setError(true)
-            setMessage('Erro no upload')
+            setMessage('Erro ao criar evento')
             
         })
     }

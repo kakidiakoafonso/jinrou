@@ -33,6 +33,8 @@ export function dispatchLogin(
         dispatch(loginError(error));
         alert("Erro ao fazer login");
         callback('error');
+        console.log(error);
+        
       });
   };
 }

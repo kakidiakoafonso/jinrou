@@ -1,11 +1,11 @@
-import { useNavigation } from '@react-navigation/native'
 import React, { useState } from 'react'
-import { View, Text, ActivityIndicator } from 'react-native'
+import { ActivityIndicator } from 'react-native'
 import { Alert } from '../../component/Alert/Alert'
 import Header from '../../component/Header/Header'
 import KeyBoardAvoidWrapper from '../../component/KeyBoardAvoidWrapper'
 import colors from '../../configs/style/colors'
 import api from '../../service/api'
+import * as ImagePicker from 'expo-image-picker';
 import * as S from "./styled"
 
 
@@ -19,32 +19,59 @@ const img = "https://criticalhits.com.br/wp-content/uploads/2019/06/20190616-min
 export default function Apoiador() 
 {
     const borda = {borderBottomColor:colors.yellow,borderBottomWidth:1}
-    const nav = useNavigation()
     const [isloading, setisloading] = useState<boolean>(false)
     const [name, setname] = useState<string>('')
     const [validation, setvalidation] = useState<string>('')
     const [description, setdescription] = useState<string>('')
     const [subscriber_discount, setsubscriber_discount] = useState<string>('')
-    const [avatar, setAvatar] = useState<string>('')
+    const [image, setImage] = useState<string>(img);
 
     const [showModal, setShowModal] = useState<boolean>(false)
     const [message, setMessage] = useState<string>('')
     const [error , setError] = useState<boolean>(false)
 
+    const pickImage = async () => {
+        // No permissions request is necessary for launching the image library
+            let result = await ImagePicker.launchImageLibraryAsync({
+            mediaTypes: ImagePicker.MediaTypeOptions.All,
+            allowsEditing: true,
+            aspect: [4, 3],
+            quality: 1,
+            });
+            if (!result.cancelled && result.type=='image') 
+            {
+            result.type
+            setImage(result.uri);
+            }
+        };
 
     function createSupporter()
     { 
+        const newSupporter = new FormData()
+        newSupporter.append('file', {
+            name: new Date() + '_profile',
+            uri:image,
+            type:'image'
+        })
+
+        newSupporter.append('name',name)
+        newSupporter.append('description',description)
+        newSupporter.append('validation',validation)
+        newSupporter.append('subscriber_discount',subscriber_discount)
+
         setisloading(true)
-        api.post('supporter',{
-            name,
-            description,
-            validation,
-            subscriber_discount,
-            avatar
+        api.post('supporter',newSupporter,{
+            headers:{
+                Accept:'application/json', 
+                "Content-Type": "multipart/form-data",
+            }
         })
         .then(response => {
             setisloading(false)
-            console.log(response.data)
+            setname('')
+            setdescription('')
+            setvalidation('')
+            setsubscriber_discount('')
             setMessage('Apoiador criado com sucesso')
             setShowModal(true)
         })
@@ -60,7 +87,9 @@ export default function Apoiador()
         <S.Container source={require("../../assets/img/Bg5.png")}>
             <Header/>
             <S.Content>
-                <S.Image source={{uri:img}}/>
+                <S.ImageButton onPress={pickImage}>
+                    <S.Image source={{uri:image}}/>
+                </S.ImageButton>
                 <S.Nome>Nome apoiador</S.Nome>
                 <S.BorderBottomView style={borda}>
                     <S.Label>Nome apoiador:</S.Label>
