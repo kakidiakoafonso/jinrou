@@ -34,14 +34,14 @@ export default function Home()
 
             <S.Image source={require("../../assets/img/HumanWithOk.png")}/>
             <ButtonYellow texto='Área de assinantes'
-                click={()=> nav.navigate("Perfil")}
+                click={()=> handleAreaAssinantes()}
                 widht={"80%"}
             />
 
             <S.Image source={require("../../assets/img/Perfil.png")}/>
 
             <ButtonTrasparent texto='Vantages de ser assinante'
-                click={()=> handleAreaAssinantes()}
+                click={()=> nav.navigate("UserVantagens") }
                 widht={"80%"}
             />
 

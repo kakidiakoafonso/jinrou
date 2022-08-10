@@ -15,6 +15,7 @@ import Perfil from '../views/Perfil/Perfil';
 import HomeStaff from '../views/HomeStaff/HomeStaff';
 import VantagensMenu from '../views/VantagensMenu/VantagensMenu';
 import VerVantagens from '../views/VerVantagens/index';
+import UserVantagens from '../views/VantagensUser/Vantagens';
 import ProximosEventos from '../views/ProximosEventos/Eventos';
 import UserAdvantageList from '../views/user-advantage-list/UserAdvantageList';
 const Stack = createNativeStackNavigator();
@@ -27,6 +28,7 @@ function NonAuthenticatedRoute() {
         <Stack.Screen name="Comprado" component={Comprado}/>
         <Stack.Screen name="Vantagens" component={Vantagens}/>
         <Stack.Screen name="VantagensMenu" component={VantagensMenu}/>
+
         
       </Stack.Navigator>
   );
@@ -56,6 +58,8 @@ function MyTabs() {
       <Tab.Screen name="uservantagens" component={UserAdvantageList}/>
       <Stack.Screen name="Perfil" component={Perfil}/>
       <Stack.Screen name="proximoeventos" component={ProximosEventos}/>
+      <Stack.Screen name="UserVantagens" component={UserVantagens}/>
+
     </Tab.Navigator>
   );
 }

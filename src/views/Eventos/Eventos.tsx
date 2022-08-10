@@ -1,4 +1,4 @@
-import React,{useEffect, useState} from 'react'
+import React,{useContext, useEffect, useState} from 'react'
 import * as S from './styled'
 import cores from "../../configs/style/colors"
 import { Ionicons } from '@expo/vector-icons';
@@ -9,6 +9,7 @@ import ButtonYellow from '../../component/Buttons/ButtonYellow';
 import { useDispatch, useSelector } from 'react-redux';
 import { reducerState } from '../../redux/rootReducer';
 import { Event,dispatchEvents } from '../../redux/events';
+import { UserContexto } from '../../context/UserContext';
 
 
 export default function Eventos() 
@@ -18,6 +19,7 @@ export default function Eventos()
     const dispatch = useDispatch()
     const events = useSelector<reducerState,Event[]>(state=> state.eventReducer.event)
     const isloading = useSelector<reducerState,boolean>(state=> state.eventReducer.loading)
+    const {staff}:{staff:boolean} = useContext(UserContexto)
     console.log(events);
     useEffect(()=>{
         dispatch(dispatchEvents())
@@ -34,7 +36,7 @@ export default function Eventos()
             <S.FlatList
                 data={events}
                 keyExtractor={(e)=> String(e.id)}
-                renderItem={({item}:{item:Event})=><ListItem checkbox event={item} isStaff/>}
+                renderItem={({item}:{item:Event})=><ListItem checkbox event={item} isStaff={staff}/>}
                 showsVerticalScrollIndicator={false}
             />
 

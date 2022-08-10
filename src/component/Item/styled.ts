@@ -3,7 +3,7 @@ import cores from "../../configs/style/colors"
 
 export const Container = styled.View`
 width: 100%;
-height: 140px;
+height: 150px;
 flex-direction: row;
 align-items: center;
 justify-content: space-between;
@@ -23,13 +23,14 @@ margin-bottom: 3px;
 `
 export const Message = styled.Text`
 color: ${cores.yellow};
-height: 60%;
-width: 95%;
+flex: 1;
+overflow: hidden;
 `
 export const Date = styled.Text`
 color: ${cores.yellow};
 font-size: 13px;
 font-weight: bold;
+/* margin-top: 3px; */
 `
 export const Image = styled.Image`
 width: 30%;

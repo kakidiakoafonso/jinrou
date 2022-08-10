@@ -7,6 +7,7 @@ import * as S from "./styled"
 import { reducerState } from '../../redux/rootReducer';
 import { ActivityIndicator } from 'react-native';
 import { Alert } from '../../component/Alert/Alert';
+import { useNavigation } from '@react-navigation/native';
 
 export default function Login() 
 {
@@ -18,6 +19,7 @@ export default function Login()
     const [showModal, setshowModal] = useState<boolean>(false)
    const dispatch = useDispatch()
    const isLoading = useSelector<reducerState,boolean>(state=> state.userReducer.loading)
+   const {navigate} = useNavigation()
    const acessGrantedhandler = (result:'error'|'sucess'|'denied'|'ghostUser'):void =>
    {
     console.log(result);
@@ -61,6 +63,9 @@ export default function Login()
     const FinalPassword:string = '123456';
     if(iStaff) dispatch(dispatchLogin(FinalEmail,FinalPassword,acessGrantedhandler));
     else dispatch(dispatchLogin(FinalEmail,FinalPassword,acessGrantedhandler));
+   }
+   function handleSignUp() {
+    navigate('UserSign')
    }
     
     return (
@@ -113,7 +118,7 @@ export default function Login()
 
             <S.TextoInfoWrapper>
                 <S.TextoInfo>Não tem cadastro?</S.TextoInfo>
-                <S.ButtonCadastrar activeOpacity={0.7} >
+                <S.ButtonCadastrar activeOpacity={0.7} onPress={handleSignUp}>
                     <S.TextoInfo>Cadastrar-se</S.TextoInfo>
                 </S.ButtonCadastrar>
             </S.TextoInfoWrapper>
