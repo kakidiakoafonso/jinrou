@@ -41,7 +41,9 @@ export default function Home()
             <S.Image source={require("../../assets/img/Perfil.png")}/>
 
             <ButtonTrasparent texto='Vantages de ser assinante'
-                click={()=> nav.navigate("UserVantagens") }
+                click={()=> console.log('Clicou');
+                 }
+                // click={()=> nav.navigate("UserVantagens") }
                 widht={"80%"}
             />
 
