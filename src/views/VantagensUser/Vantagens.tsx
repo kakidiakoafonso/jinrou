@@ -1,40 +1,30 @@
-import React,{useState} from 'react'
-import * as S from './styled'
-import cores from "../../configs/style/colors"
-import { Ionicons } from '@expo/vector-icons';
-import ListItem from '../../component/Item/ListItem';
-import { useNavigation } from '@react-navigation/native';
-import ButtonYellow from '../../component/Buttons/ButtonYellow';
+import React from "react";
+import * as S from "./styled";
+import { useNavigation } from "@react-navigation/native";
+import ButtonYellow from "../../component/Buttons/ButtonYellow";
+import Header from "../../component/Header/Header";
 
-
-export default function UserVantagens() 
-{
-    const nav = useNavigation()
-    return (
-        <S.Container source={require("../../assets/img/Bg4.png")}>
-            <S.Header>
-                <S.BackIcon onPress={()=>nav.goBack()}>
-                <Ionicons name="arrow-back-outline" size={44} color={cores.yellow} />
-                </S.BackIcon>
-            </S.Header>
-
-
-            <S.FlatList
-                data={[1,2,3,4,5,6,7]}
-                keyExtractor={(e)=> String(e)}
-                renderItem={()=><ListItem checkbox titulo='Apoiador'/>}
-                showsVerticalScrollIndicator={false}
-            />
-
-            
-            <S.ButtonAddContainer>
-
-                <ButtonYellow texto='Adicionar ao vantagem'
-                    // click={()=>}
-                />
-            </S.ButtonAddContainer>
-
-            
-        </S.Container>
-    )
+export default function UserVantagens() {
+  const nav = useNavigation();
+  return (
+    <S.Container source={require("../../assets/img/Bg4.png")}>
+      <Header />
+      <S.Content>
+        <S.Title>VANTAGENS DE</S.Title>
+        <S.SubTitle>ser assinante</S.SubTitle>
+        <S.TextoYellow>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Itaque,
+          maiores quibusdam. Sequi repellat, numquam atque recusandae veniam
+          corporis quisquam. Placeat fuga nostrum ad animi obcaecati,
+          repellendus quo reiciendis nam itaque!
+        </S.TextoYellow>
+        <S.ButtonAddContainer>
+          <ButtonYellow
+            texto="Comprar assinatura"
+            // click={()=>}
+          />
+        </S.ButtonAddContainer>
+      </S.Content>
+    </S.Container>
+  );
 }
