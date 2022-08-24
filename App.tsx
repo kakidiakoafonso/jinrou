@@ -1,13 +1,14 @@
-import UserContext from './src/context/UserContext';
-import Route from './src/route/Route';
-import {Provider} from 'react-redux'
-import store from './src/redux/index';
+import Route from "./src/route/Route";
+import { Provider } from "react-redux";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import store from "./src/redux/index";
+const queryClient = new QueryClient();
 export default function App() {
   return (
-    <Provider store={store}>      
-      <UserContext>
-        <Route/>
-      </UserContext>
-    </Provider>
+    <QueryClientProvider client={queryClient}>
+      <Provider store={store}>
+        <Route />
+      </Provider>
+    </QueryClientProvider>
   );
 }

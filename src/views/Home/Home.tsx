@@ -10,10 +10,11 @@ import colors from "../../configs/style/colors";
 
 const img =
   "https://media-exp1.licdn.com/dms/image/C4D03AQGf8FcWQZxdQw/profile-displayphoto-shrink_800_800/0/1638180981373?e=1666828800&v=beta&t=RQR6creO9gc6KIAYT_usGZtL5ah4-C2AHNcROHloPao";
+
 export default function Home() {
   const nav = useNavigation();
-  const userType = useSelector<reducerState, "STAFF" | "USER" | null>(
-    (state) => state.contextReducer.user
+  const userType = useSelector<reducerState, UserType>(
+    (state) => state.userReducer.type
   );
 
   function handleAreaAssinantes() {
@@ -45,13 +46,11 @@ export default function Home() {
           widht={"80%"}
         />
 
-        {/* <S.Image source={require("../../assets/img/Perfil.png")} /> */}
         <AntDesign name="question" size={50} color={colors.yellow} />
 
         <ButtonTrasparent
           texto="Vantages de ser assinante"
-          click={() => console.log("Clicou")}
-          // click={()=> nav.navigate("UserVantagens") }
+          click={() => nav.navigate("UserVantagens")}
           widht={"80%"}
         />
       </S.Content>

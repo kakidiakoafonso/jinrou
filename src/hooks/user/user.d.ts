@@ -1,5 +1,6 @@
-export type User = {
+type User = {
   id: string;
+  name: string;
   email: string;
   password: string;
   rg: string;
@@ -8,3 +9,4 @@ export type User = {
   subscriber: boolean;
   expiration_date: string;
 };
+type UserParams = Omit<User, "id">;

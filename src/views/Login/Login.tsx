@@ -1,13 +1,12 @@
 import React, { useContext, useState } from "react";
 import { AntDesign } from "@expo/vector-icons";
 import { useDispatch, useSelector } from "react-redux";
-import { dispatchLogin } from "../../redux/user/user.dispatch";
-import { user, staff } from "../../redux/userContext/context.action";
+import { setUser, setStaff } from "../../redux/user/action";
 import * as S from "./styled";
-import { reducerState } from "../../redux/rootReducer";
 import { ActivityIndicator } from "react-native";
 import { Alert } from "../../component/Alert/Alert";
 import { useNavigation } from "@react-navigation/native";
+import { useAuthUser } from "../../hooks";
 
 export default function Login() {
   const [email, setemail] = useState<string>("");
@@ -17,10 +16,9 @@ export default function Login() {
   const [message, setmessage] = useState<string>("");
   const [showModal, setshowModal] = useState<boolean>(false);
   const dispatch = useDispatch();
-  const isLoading = useSelector<reducerState, boolean>(
-    (state) => state.userReducer.loading
-  );
+
   const { navigate } = useNavigation();
+  const { mutate, isLoading } = useAuthUser();
   const acessGrantedhandler = (
     result: "error" | "sucess" | "denied" | "ghostUser"
   ): void => {
@@ -36,8 +34,6 @@ export default function Login() {
       setmessage("Autenticado com sucesso");
       setshowModal(true);
       setTimeout(() => {
-        if (iStaff) dispatch(staff());
-        else dispatch(user());
         setshowModal(false);
       }, 2000);
     }
@@ -58,10 +54,19 @@ export default function Login() {
     // const FinalPassword:string = password;
     const FinalEmail: string = "kakidiako11@gmail.com";
     const FinalPassword: string = "123456";
-    if (iStaff)
-      dispatch(dispatchLogin(FinalEmail, FinalPassword, acessGrantedhandler));
-    else
-      dispatch(dispatchLogin(FinalEmail, FinalPassword, acessGrantedhandler));
+    const credentials: Credentials = {
+      email: FinalEmail,
+      password: FinalPassword,
+    };
+    mutate(credentials, {
+      onSuccess(data, variables, context) {
+        if (iStaff) dispatch(setStaff(data));
+        else dispatch(setUser(data));
+      },
+      onError(error, variables, context) {
+        alert(Error);
+      },
+    });
   }
   function handleSignUp() {
     navigate("UserSign");
@@ -122,13 +127,13 @@ export default function Login() {
           </S.ButtonCadastrar>
         </S.TextoInfoWrapper>
       </S.ContentContainer>
-      <Alert
+      {/* <Alert
         message={message}
-        isError={error}
+        isError={isE}
         visible={showModal}
         isLogin={true}
         setmodalVisibility={() => setshowModal(false)}
-      />
+      /> */}
     </S.Container>
   );
 }
