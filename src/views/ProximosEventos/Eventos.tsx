@@ -43,9 +43,7 @@ export default function ProximosEventos() {
       <S.FlatList
         data={events}
         keyExtractor={(item) => String(item.id)}
-        renderItem={({ item }: { item: Evento }) => (
-          <ListItem checkbox event={item} />
-        )}
+        renderItem={({ item }: { item: Evento }) => <ListItem event={item} />}
         showsVerticalScrollIndicator={false}
       />
 

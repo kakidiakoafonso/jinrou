@@ -4,13 +4,6 @@ import * as S from "./styled";
 import ListItem from "../../component/DetailItem/ListItem";
 import BackComponent from "../../component/Header/BackButton";
 import { FlatList } from "../Eventos/styled";
-import { useDispatch, useSelector } from "react-redux";
-import { reducerState } from "../../redux/rootReducer";
-import {
-  dispatchPurchase,
-  fetchingPurchases,
-  Purchase,
-} from "../../redux/purchase";
 import { LoadingModal } from "../../component/Loading/Loading";
 import { useEventsPurchases } from "../../hooks/events";
 
@@ -23,14 +16,14 @@ export default function Compras() {
   return (
     <S.Container source={require("../../assets/img/Bg8.png")}>
       <BackComponent />
-      {/* <FlatList
-        data={purchases}
+      <FlatList
+        data={data}
         showsVerticalScrollIndicator={false}
         keyExtractor={(item) => String(item)}
-        renderItem={({ item }: { item: Purchase }) => (
+        renderItem={({ item }: { item: Evento }) => (
           <ListItem purchases={item} />
         )}
-      /> */}
+      />
       <LoadingModal visible={isLoading} />
     </S.Container>
   );

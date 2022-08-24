@@ -22,7 +22,7 @@ function useDeleteEvent() {
   );
 }
 function useEventsPurchases() {
-  return useQuery<Evento[], Error>(["useEventsPurchases"], () =>
+  return useQuery<Evento[], Error, Evento[]>(["getEvents"], () =>
     service.getPurchases()
   );
 }

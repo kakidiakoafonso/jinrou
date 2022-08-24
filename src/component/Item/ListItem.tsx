@@ -2,16 +2,15 @@ import React, { useState } from "react";
 import { Entypo } from "@expo/vector-icons";
 import colors from "../../configs/style/colors";
 import * as S from "./styled";
-import { Event, removeEvents } from "../../redux/events";
-import api from "../../service/api";
 import { useDispatch, useSelector } from "react-redux";
 import { Alert } from "../Alert/Alert";
 import { cartAdd, cartRemove } from "../../redux/cart";
 import { reducerState } from "../../redux/rootReducer";
 import { useDeleteEvent } from "../../hooks";
+import { useQueryClient } from "@tanstack/react-query";
 
 type Props = {
-  event: Event;
+  event: Evento;
 };
 const img =
   "https://ovicio.com.br/wp-content/uploads/2021/03/20210315-attack-on-titan-eren_7jay-555x555.png";
@@ -24,6 +23,7 @@ export default function ListItem({ event }: Props) {
   );
   const isStaff: boolean = user === "STAFF";
   const dispatch = useDispatch();
+  const queryCliente = useQueryClient();
   const { mutate, isLoading, isError } = useDeleteEvent();
   function handlePress() {
     if (checked) {
@@ -38,14 +38,16 @@ export default function ListItem({ event }: Props) {
   function handleDelete() {
     mutate(event.id, {
       onSuccess: () => {
+        queryCliente.invalidateQueries("getEvents");
         setmessage("Removido com sucesso!");
         setshowModal(true);
       },
-      onError: () => {
+      onError(error, variables, context) {
         setmessage(`
             Erro ao remover evento,
             Tente novamente mais tarde!`);
         setshowModal(true);
+        console.log(error);
       },
     });
   }

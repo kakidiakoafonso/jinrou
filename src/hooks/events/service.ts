@@ -13,17 +13,7 @@ export async function remove(eventId: string): Promise<Evento> {
   return api.delete(`events/${eventId}`).then((response) => response.data);
 }
 export async function getPurchases(): Promise<Evento[]> {
-  console.log("executando getPurchases");
-
-  return api
-    .delete(`events/purchases`)
-    .then((response) => {
-      const dados = response.data;
-      console.log(dados);
-
-      return dados;
-    })
-    .catch((error) => console.log(error));
+  return api.get(`events/purchases`).then((response) => response.data);
 }
 export async function create(event: FormData): Promise<Evento> {
   return api
