@@ -1,6 +1,8 @@
+import { Dimensions } from "react-native";
 import styled from "styled-components/native";
 import colors from "../../configs/style/colors";
 
+const width = 0.9 * Dimensions.get('screen').width
 export const Modal = styled.Modal`
 flex: 1;
 `
@@ -19,6 +21,8 @@ height: 50%;
 background-color: ${colors.yellow};
 justify-content: center;
 align-items:center;
+padding-top: 20px;
+padding-bottom: 55px;
 `
 export const Logo = styled.Image`
 width: 130px;
@@ -26,10 +30,14 @@ height: 130px;
 position: absolute;
 top: -100px;
 `
-export const Wrapper = styled.View`
+export const FlatListContainer = styled.View`
 width: 90%;
-height: 40%;
-/* background-color: ${colors.grey}; */
+height: 90%;
+/* background-color: red; */
+`
+export const Wrapper = styled.View`
+width: ${width +'px'};
+height: 150px;
 justify-content: space-between;
 `
 export const InputsContainer = styled.View`
@@ -67,3 +75,10 @@ font-size: 15px;
 color: ${colors.yellow};
 font-weight: bold;
 `;
+
+export const Separator = styled.View`
+height: 1px;
+width: 100%;
+background-color: #ccc;
+margin-bottom: 40px;
+`

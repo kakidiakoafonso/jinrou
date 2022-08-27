@@ -7,7 +7,7 @@ import { useNavigation } from '@react-navigation/native';
 import ButtonYellow from '../../component/Buttons/ButtonYellow';
 
 
-export default function Eventos() 
+export default function Vantagens() 
 {
     const nav = useNavigation()
     return (

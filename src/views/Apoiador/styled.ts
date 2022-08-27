@@ -43,12 +43,16 @@ justify-content: space-between;
 padding-left: 2px;
 flex-direction: row;
 `;
-export const Image = styled.Image`
+export const ImageButton = styled.TouchableOpacity`
 width: 140px;
 height:140px;
 border-radius: 5px;
 position: absolute;
 top: -150px;
+`;
+export const Image = styled.Image`
+width: 100px;
+height:100%;
 `;
 export const Nome = styled.Text`
 color: ${cores.yellow};
