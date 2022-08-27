@@ -99,6 +99,7 @@ export default function Login() {
       <S.TopRounded>
         <S.TopRoundedImage
         // source={require("../../assets/img/YellowThing.png")}
+        // source={require("../../assets/img/Bg.png")}
         ></S.TopRoundedImage>
       </S.TopRounded>
 

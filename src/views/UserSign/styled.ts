@@ -1,8 +1,11 @@
+import { Dimensions } from "react-native";
 import styled from "styled-components/native";
 import cores from "../../configs/style/colors";
-
+const { height, width } = Dimensions.get("screen");
 export const Container = styled.ImageBackground`
-  flex: 1;
+  /* flex: 1; */
+  width: ${width + "px"};
+  height: ${height + "px"};
   align-items: center;
 `;
 
