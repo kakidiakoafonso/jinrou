@@ -83,7 +83,7 @@ export function UserSign() {
         </S.BorderBottomView>
         <S.BorderBottomView style={borda}>
           <S.Label>CPF:</S.Label>
-          <S.Input placeholder="Nome" value={cpf} onChangeText={(e) => email} />
+          <S.Input placeholder="CPF" value={cpf} onChangeText={(e) => email} />
         </S.BorderBottomView>
         <S.BorderBottomView style={borda}>
           <S.Label>RG:</S.Label>
@@ -93,11 +93,11 @@ export function UserSign() {
         <S.SmallContainer>
           <S.BorderBottomViewSmall style={borda}>
             <S.Label>Aniversario:</S.Label>
-            <S.Input placeholder="Nome" />
+            <S.Input placeholder="Aniversario" />
           </S.BorderBottomViewSmall>
           <S.BorderBottomViewSmall style={borda}>
             <S.Label>Assinatura:</S.Label>
-            <S.Input placeholder="Nome" />
+            <S.Input placeholder="Assinatura" />
           </S.BorderBottomViewSmall>
         </S.SmallContainer>
       </S.Content>

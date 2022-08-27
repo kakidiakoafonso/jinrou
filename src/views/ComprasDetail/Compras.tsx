@@ -9,20 +9,14 @@ import { useEventsPurchases } from "../../hooks/events";
 
 export default function Compras() {
   const { data, isLoading } = useEventsPurchases();
-  console.log("=============== useEventsPurchases ================");
-  console.log(data);
-  console.log("=============== useEventsPurchases ================");
-
   return (
     <S.Container source={require("../../assets/img/Bg8.png")}>
       <BackComponent />
       <FlatList
         data={data}
         showsVerticalScrollIndicator={false}
-        keyExtractor={(item) => String(item)}
-        renderItem={({ item }: { item: Evento }) => (
-          <ListItem purchases={item} />
-        )}
+        keyExtractor={(item) => String(item.id)}
+        renderItem={({ item }: { item: Evento }) => <ListItem evento={item} />}
       />
       <LoadingModal visible={isLoading} />
     </S.Container>
