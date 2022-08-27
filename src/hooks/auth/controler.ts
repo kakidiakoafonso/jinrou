@@ -6,6 +6,10 @@ function useAuthUser() {
     service.userLogin(credential)
   );
 }
-function useAuthStaff() {}
+function useAuthStaff() {
+  return useMutation<Staff, Error, Credentials>((credential: Credentials) =>
+    service.staffLogin(credential)
+  );
+}
 
 export { useAuthUser, useAuthStaff };

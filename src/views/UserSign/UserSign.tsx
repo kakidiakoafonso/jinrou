@@ -3,21 +3,33 @@ import { ActivityIndicator } from "react-native";
 import * as ImagePicker from "expo-image-picker";
 import colors from "../../configs/style/colors";
 import * as S from "./styled";
+import { Formik } from "formik";
 import { useCreateUser } from "../../hooks";
+import { createUserSchema } from "../../util/formik/validation";
+import { ValidaThor } from "../../component/validation";
+import { Alert } from "../../component/Alert/Alert";
+import { useDispatch } from "react-redux";
+import { setUser } from "../../redux/user/action";
 
+type FormikValue = {
+  email: string;
+  name: string;
+  password: string;
+  rg: string;
+  cpf: string;
+  birth_day: string;
+  avatar: string;
+};
 const initialFoto =
   "https://icon-library.com/images/no-profile-pic-icon/no-profile-pic-icon-24.jpg";
 export function UserSign() {
   const borda = { borderBottomColor: colors.yellow, borderBottomWidth: 1 };
+  const dispatch = useDispatch();
   const { mutate, isLoading } = useCreateUser();
-
-  const [name, setname] = useState<string>();
-  const [rg, setrg] = useState<string>();
-  const [email, setemail] = useState<string>();
-  const [password, setpassword] = useState<string>();
-  const [cpf, setcpf] = useState<string>();
-  const [birth_day, setbirth_day] = useState<string>();
   const [avatar, setavatar] = useState<string>(initialFoto);
+  const [error, seterror] = useState<boolean>(false);
+  const [message, setmessage] = useState<string>("");
+  const [showModal, setshowModal] = useState<boolean>(false);
 
   const pickImage = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
@@ -32,83 +44,171 @@ export function UserSign() {
     }
   };
 
-  function handleCreateUser() {
+  function handleCreateUser(values: FormikValue) {
     const userInfo: FormData = new FormData();
-    userInfo.append("name", name);
-    userInfo.append("rg", rg);
-    userInfo.append("email", email);
-    userInfo.append("password", "password");
-    userInfo.append("cpf", cpf);
-    userInfo.append("birth_day", birth_day);
-    userInfo.append("expiration_date", "expiration_date");
-    userInfo.append("subscriber", 0);
-    // userInfo.append('file', {
-    //     name: new Date() + '_profile',
-    //     uri:avatar,
-    //     type:'image'
-    // })
+    userInfo.append("name", values.name);
+    userInfo.append("rg", values.rg);
+    userInfo.append("email", values.email);
+    userInfo.append("password", values.password);
+    userInfo.append("cpf", values.cpf);
+    userInfo.append("birth_day", values.birth_day);
+    if (avatar !== initialFoto) {
+      userInfo.append("file", {
+        name: new Date() + "_profile",
+        uri: avatar,
+        type: "image",
+      });
+    }
 
+    console.log("========== mutate out =========");
     console.log(userInfo);
     mutate(userInfo, {
-      onError(error, variables, context) {
+      onError(error) {
         console.log("============== Error ======================");
-
         console.log(error);
-        console.log(variables);
-        console.log(context);
+        seterror(true);
+        setmessage("Tente novamente!");
+        setshowModal(true);
       },
-      onSuccess(data, variables, context) {
+      onSuccess(data, context) {
         console.log("============== Sucess ======================");
         console.log(data);
-        console.log(variables);
-        console.log(context);
+        seterror(false);
+        setmessage("Autenticado com sucesso");
+        setshowModal(true);
+        setTimeout(() => {
+          setshowModal(false);
+          dispatch(setUser(data));
+        }, 2000);
       },
     });
   }
 
   return (
     <S.Container source={require("../../assets/img/Bg5.png")}>
-      <S.Header></S.Header>
-      <S.Content>
-        <S.AvatarButton onPress={pickImage}>
-          <S.Image source={{ uri: avatar }} />
-        </S.AvatarButton>
-        <S.BorderBottomView style={borda}>
-          <S.Label>Nome:</S.Label>
-          <S.Input
-            placeholder="Nome"
-            value={name}
-            onChangeText={(e) => setname(e)}
-          />
-        </S.BorderBottomView>
-        <S.BorderBottomView style={borda}>
-          <S.Label>CPF:</S.Label>
-          <S.Input placeholder="CPF" value={cpf} onChangeText={(e) => email} />
-        </S.BorderBottomView>
-        <S.BorderBottomView style={borda}>
-          <S.Label>RG:</S.Label>
-          <S.Input placeholder="RG" value={email} onChangeText={(e) => email} />
-        </S.BorderBottomView>
+      <Formik
+        initialValues={{
+          email: "",
+          name: "",
+          password: "",
+          rg: "",
+          cpf: "",
+          birth_day: "",
+        }}
+        validationSchema={createUserSchema}
+        onSubmit={(values) => {
+          handleCreateUser(values as FormikValue);
+        }}
+      >
+        {({
+          values,
+          handleChange,
+          handleBlur,
+          handleSubmit,
+          errors,
+          touched,
+        }) => {
+          return (
+            <React.Fragment>
+              <S.Header />
+              <S.Content>
+                <S.AvatarButton onPress={pickImage}>
+                  <S.Image source={{ uri: avatar }} />
+                </S.AvatarButton>
+                <S.BorderBottomView style={borda}>
+                  <S.Label>Nome:</S.Label>
+                  <S.Input
+                    placeholder="Nome"
+                    value={values.name}
+                    onChangeText={handleChange("name")}
+                    onBlur={handleBlur("name")}
+                  />
+                </S.BorderBottomView>
+                {errors.name && touched.name && (
+                  <ValidaThor message={errors.name} />
+                )}
+                <S.BorderBottomView style={borda}>
+                  <S.Label>Email:</S.Label>
+                  <S.Input
+                    placeholder="Email"
+                    value={values.email}
+                    onChangeText={handleChange("email")}
+                    onBlur={handleBlur("email")}
+                  />
+                </S.BorderBottomView>
+                {errors.email && touched.email && (
+                  <ValidaThor message={errors.email} />
+                )}
+                <S.BorderBottomView style={borda}>
+                  <S.Label>CPF:</S.Label>
+                  <S.Input
+                    placeholder="CPF"
+                    value={values.cpf}
+                    onChangeText={handleChange("cpf")}
+                    onBlur={handleBlur("cpf")}
+                    keyboardType="numeric"
+                  />
+                </S.BorderBottomView>
+                {errors.cpf && touched.cpf && (
+                  <ValidaThor message={errors.cpf} />
+                )}
+                <S.BorderBottomView style={borda}>
+                  <S.Label>RG:</S.Label>
+                  <S.Input
+                    placeholder="RG"
+                    value={values.rg}
+                    onChangeText={handleChange("rg")}
+                    onBlur={handleBlur("rg")}
+                  />
+                </S.BorderBottomView>
+                {errors.rg && touched.rg && <ValidaThor message={errors.rg} />}
 
-        <S.SmallContainer>
-          <S.BorderBottomViewSmall style={borda}>
-            <S.Label>Aniversario:</S.Label>
-            <S.Input placeholder="Aniversario" />
-          </S.BorderBottomViewSmall>
-          <S.BorderBottomViewSmall style={borda}>
-            <S.Label>Assinatura:</S.Label>
-            <S.Input placeholder="Assinatura" />
-          </S.BorderBottomViewSmall>
-        </S.SmallContainer>
-      </S.Content>
+                <S.SmallContainer>
+                  <S.BorderBottomViewSmall style={borda}>
+                    <S.Label>Aniversario:</S.Label>
+                    <S.Input
+                      placeholder="Aniversario"
+                      value={values.birth_day}
+                      onChangeText={handleChange("birth_day")}
+                      onBlur={handleBlur("birth_day")}
+                    />
+                  </S.BorderBottomViewSmall>
+                </S.SmallContainer>
+                {errors.birth_day && touched.birth_day && (
+                  <ValidaThor message={errors.birth_day} />
+                )}
+                <S.BorderBottomView style={borda}>
+                  <S.Label>Senha:</S.Label>
+                  <S.Input
+                    placeholder="Senha"
+                    value={values.password}
+                    onChangeText={handleChange("password")}
+                    onBlur={handleBlur("password")}
+                  />
+                </S.BorderBottomView>
+                {errors.password && touched.password && (
+                  <ValidaThor message={errors.password} />
+                )}
+              </S.Content>
 
-      <S.ButtonAdd onPress={handleCreateUser} disabled={isLoading}>
-        {isLoading ? (
-          <ActivityIndicator size="small" color={colors.yellow} />
-        ) : (
-          <S.ImageAdd source={require("../../assets/img/Add.png")} />
-        )}
-      </S.ButtonAdd>
+              <S.ButtonAdd onPress={() => handleSubmit()} disabled={isLoading}>
+                {isLoading ? (
+                  <ActivityIndicator size="small" color={colors.yellow} />
+                ) : (
+                  <S.ImageAdd source={require("../../assets/img/Add.png")} />
+                )}
+              </S.ButtonAdd>
+            </React.Fragment>
+          );
+        }}
+      </Formik>
+      <Alert
+        message={message}
+        isError={error}
+        visible={showModal}
+        isLogin={true}
+        setmodalVisibility={() => setshowModal(false)}
+      />
     </S.Container>
   );
 }

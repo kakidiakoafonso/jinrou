@@ -5,10 +5,10 @@ export function setUser(user: User) {
     payload: user,
   };
 }
-export function setStaff(user: User) {
+export function setStaff(staff: Staff) {
   return {
     type: SET_STAFF,
-    payload: user,
+    payload: staff,
   };
 }
 export function remove() {

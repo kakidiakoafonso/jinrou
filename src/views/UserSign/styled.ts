@@ -67,8 +67,11 @@ export const ButtonAdd = styled.TouchableOpacity`
   align-items: center;
   justify-content: center;
   align-self: flex-end;
-  margin-right: 15px;
-  margin-top: 55px;
+  /* margin-right: 15px; */
+  /* margin-top: 55px; */
+  position: absolute;
+  bottom: 10%;
+  right: 5%;
 `;
 export const ImageAdd = styled.Image`
   width: 60px;
