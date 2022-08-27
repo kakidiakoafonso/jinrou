@@ -18,7 +18,6 @@ export const Header = styled.View`
 `;
 export const Content = styled.View`
   width: 90%;
-  height: 200px;
   justify-content: space-between;
   align-items: center;
   margin-top: 90px;
@@ -79,4 +78,11 @@ export const ButtonAdd = styled.TouchableOpacity`
 export const ImageAdd = styled.Image`
   width: 60px;
   height: 40px;
+`;
+
+export const SubmitButtonContainer = styled.View`
+  width: 90%;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
 `;

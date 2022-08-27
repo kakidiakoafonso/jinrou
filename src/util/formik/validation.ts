@@ -22,3 +22,12 @@ export const createUserSchema = Yup.object().shape({
     .email("Email inválido!")
     .required("Campo email está vazia"),
 });
+export const updateUserSchema = Yup.object().shape({
+  name: Yup.string().min(6, "Nome curto!").required("Campo nome está vazia"),
+  birth_day: Yup.string()
+    .matches(/^\d{2}\/\d{2}\/\d{4}$/, "Seguir formato DD/MM/AAAA")
+    .required("Campo Aniversario está vazio!"),
+  password: Yup.string()
+    .min(6, "Senha curta!")
+    .required("Campo senha está vazia"),
+});

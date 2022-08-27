@@ -11,6 +11,7 @@ import { Alert } from "../../component/Alert/Alert";
 import { useDispatch } from "react-redux";
 import { setUser } from "../../redux/user/action";
 import KeyBoardAvoidWrapper from "../../component/KeyBoardAvoidWrapper/index";
+import { SubmitButton } from "../../component/submit-button/Submit";
 
 type FormikValue = {
   email: string;
@@ -194,17 +195,13 @@ export function UserSign() {
                     <ValidaThor message={errors.password} />
                   )}
                 </S.Content>
-
-                <S.ButtonAdd
-                  onPress={() => handleSubmit()}
-                  disabled={isLoading}
-                >
-                  {isLoading ? (
-                    <ActivityIndicator size="small" color={colors.yellow} />
-                  ) : (
-                    <S.ImageAdd source={require("../../assets/img/Add.png")} />
-                  )}
-                </S.ButtonAdd>
+                <S.SubmitButtonContainer>
+                  <SubmitButton
+                    onPress={() => handleSubmit()}
+                    isLoading={isLoading}
+                    disabled={isLoading}
+                  />
+                </S.SubmitButtonContainer>
               </React.Fragment>
             );
           }}

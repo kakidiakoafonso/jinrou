@@ -1,5 +1,6 @@
 import { useMutation, useQuery, UseQueryResult } from "@tanstack/react-query";
 import * as service from "./service";
+import { UserUpdate } from "./service";
 
 function useGetUser(userId: string) {
   return useQuery<User, Error, User, string>([userId], () =>
@@ -12,8 +13,8 @@ function useCreateUser() {
   );
 }
 function useUpdateUser() {
-  return useMutation<User, Error, FormData>((user: FormData) =>
-    service.update(user)
+  return useMutation<User, Error, UserUpdate>((data: UserUpdate) =>
+    service.update(data)
   );
 }
 function useDeleteUser() {
