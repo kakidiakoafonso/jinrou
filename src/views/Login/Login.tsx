@@ -28,6 +28,7 @@ export default function Login() {
     };
     UserAuth.mutate(credentials, {
       onSuccess(data, variables, context) {
+        console.log(credentials);
         console.log(data);
 
         if (data?.status) {
@@ -106,10 +107,10 @@ export default function Login() {
       <Formik
         initialValues={{ email: "", password: "" }}
         onSubmit={(value) => {
-          // const email = value.email;
-          // const password = value.password;
-          const email = "kakidiako11@gmail.com";
-          const password = "123456";
+          const email = value.email;
+          const password = value.password;
+          // const email = "kakidiako11@gmail.com";
+          // const password = "123456";
           if (iStaff) handleStaffLogin({ email, password });
           else handleUserLogin({ email, password });
         }}
